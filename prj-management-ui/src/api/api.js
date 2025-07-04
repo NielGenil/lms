@@ -14,3 +14,21 @@ export const LoginAPI = async (formData) => {
   return response.json();
 };
 
+export const RegisterAPI = async (formData) => {
+  const credentials = Object.fromEntries(formData.entries());
+  const response = await fetch(`${BASE_URL}/api/auth/register/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(credentials),
+  });
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw errorData;
+  }
+  return response.json();
+};
+
+export const getSectionAPI = async () => {
+  const response = await fetch(`${BASE_URL}/api/auth/section/`)
+  return await response.json();
+}

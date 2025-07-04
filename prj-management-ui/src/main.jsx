@@ -4,28 +4,37 @@ import "./index.css";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./pages/login-page.jsx";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import RegisterPage from "./pages/register-page.jsx";
+import SectionPage from "./pages/section.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />
+    element: <App />,
+    children: [
+      {
+        path: "/section",
+        element: <SectionPage />,
+      },
+    ],
   },
   {
     path: "/login",
-    element: <LoginPage />
-  }
+    element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
+  },
 ]);
 
-const queryClient = new QueryClient ()
-
-
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-    <RouterProvider router={router} />
-    </ QueryClientProvider>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </StrictMode>
-  
 );

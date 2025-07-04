@@ -42,8 +42,26 @@ class UserSerializer(serializers.ModelSerializer):
     
 
 
+from rest_framework import serializers
+from django.contrib.auth.models import User
+
 class RegisterUserSerializer(serializers.ModelSerializer):
+    password_confirm = serializers.CharField(write_only=True)
+
     class Meta:
         model = User
-        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'password']
+        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'password', 'password_confirm']
+
+    def validate(self, data):
+        # Ensure password and password_confirm match
+        if data['password'] != data['password_confirm']:
+            raise serializers.ValidationError({"password_confirm": "Passwords must match."})
+        return data
+
+    def create(self, validated_data):
+        # Remove password_confirm from validated data before creating user
+        validated_data.pop('password_confirm', None)
+        user = User.objects.create_user(**validated_data)
+        return user
+
 

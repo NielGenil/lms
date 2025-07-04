@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useEffect, useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
@@ -57,18 +57,20 @@ export default function LoginPage() {
       >
         <h1 className="font-semibold">Login</h1>
         <label>Username</label>
-        <input name="username" type="text" className="border-1 border-gray-500/50 rounded-md" />
+        <input name="username" type="text" className="border-1 p-2 text-sm border-gray-500/50 rounded-md" />
 
         <label>Password</label>
         <input
           name="password"
           type="password"
-          className="border-1 border-gray-500/50 rounded-md"
+          className="border-1 p-2 text-sm border-gray-500/50 rounded-md"
         />
 
         <button type="submit" className="p-2 bg-slate-900 text-white rounded-md hover:bg-slate-700">
-          Submit
+          Login
         </button>
+
+        <p>Dont have an account yet? <Link className="text-blue-500" to={"/register"}>Register here.</Link></p>
 
         {showError && (
           <div className="absolute top-0 left-0 w-full h-full bg-black/40 bg-opacity-50 flex justify-center items-center">

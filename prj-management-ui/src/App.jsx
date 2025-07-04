@@ -1,5 +1,5 @@
 import { useAuth } from "./hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 
@@ -49,8 +49,8 @@ function App() {
         </div>
 
         <div className="flex flex-col flex-1 gap-2 p-6 overflow-y-auto">
-          <a href="">Dashbord</a>
-          <a href="">Dashbord</a>
+          <Link to={"/"}>Dashbord</Link>
+          <Link to={"/section/"}>Section</Link>
           <a href="">Dashbord</a>
         </div>
 
@@ -66,7 +66,7 @@ function App() {
       {/* main content */}
       <section className="flex flex-1">
 
-
+    <Outlet/>
     
       </section>
 
